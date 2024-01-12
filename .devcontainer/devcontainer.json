@@ -1,0 +1,62 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/python-3
+{
+	"name": "test_drf",
+	// "dockerComposeFile": "docker-compose.yml",
+	// "service": "mxonline-server",
+	// "shutdownAction": "stopCompose",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".",
+		"args": {
+			// Update 'VARIANT' to pick a Python version: 3, 3.10, 3.9, 3.8, 3.7, 3.6
+			// Append -bullseye or -buster to pin to an OS version.
+			// Use -bullseye variants on local on arm64/Apple Silicon.
+			"VARIANT": "3.11-buster",
+			// Options
+			"NODE_VERSION": "none"
+		}
+	},
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"hlrossato.vscode-drf",
+				"akamud.vscode-theme-onedark",
+				"thebarkman.vscode-djaneiro",
+				"GitHub.copilot",
+				"BenjaminBenais.copilot-theme",
+				"GitHub.copilot-chat"
+			]
+		}
+	},
+	// 声明容器内使用的端口
+	// "appPort": [
+	// 	8000
+	// ],
+	// // Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// // 外部端口
+	// "forwardPorts": [
+	// 	8000
+	// ],
+	"runArgs": [
+		"-p",
+		"8000:8000",
+		"-it",
+		"--rm",
+		"-e",
+		"DOCKER_HOST=0.0.0.0"
+	], // 使用 0.0.0.0 解除绑定
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// pip3 升级、设置清华源、安装requirements.txt中的依赖包
+	// "postCreateCommand": "pip3 install --upgrade pip && pip3 config set global.index-url https:\/\/pypi.tuna.tsinghua.edu.cn\/simple",
+	// "postCreateCommand": "ln -s /usr/lib/python3.11  /workspaces/yuejuan_drf/python3.11 && ln -s /usr/lib/python3.11/site-packages /workspaces/yuejuan_drf/site-packages",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "root"
+}

@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  Mariadb:
+    container_name: Mariadb
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=123456"
+      TZ: Asia/Shanghai
+    volumes:
+      - /Volumes/Extreme\ SSD/github/DB_data/DB_data:/var/lib/mysql
+
+  DRF:
+    container_name: DRF
+    image: vsc-mxonline-e4b1b1a1cdcc3109c22d664f860b1cc1ed879500d72d52d507cbeae059bb369f:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - /Volumes/myData/github/mxshop_DRF:/workspaces/mxshop_DRF
+    command: "supervisord -n -c /etc/supervisord.conf"
+    depends_on:
+      - Mariadb
